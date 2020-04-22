@@ -1,0 +1,20 @@
+[package]
+name = "bar"
+version = "0.1.0"
+authors = ["Boyu Yang <yangby@cryptape.com>"]
+edition = "2018"
+
+[dependencies]
+bar-tools = { path = "tools" }
+
+[workspace]
+members = [
+    "tools",
+]
+
+[target.'cfg(all(not(target_os = "windows"), not(target_os="macos")))'.dependencies]
+libfoo = { path = "../libfoo", features = ["feature-b"] }
+
+[features]
+default = []
+feature-c = ["bar-tools/feature-c", "libfoo/feature-c"]
