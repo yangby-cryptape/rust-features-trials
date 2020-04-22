@@ -10,6 +10,7 @@ Try out features of Rust.
 
 - Features
   - [A crate should be only enable for Linux, and we want to control features of it](features/features-only-for-specific-targets).
+  - [Features of dependencies will be changed if build-dependencies use different features](features/build-deps-change-features-of-deps).
 
 ## License
 

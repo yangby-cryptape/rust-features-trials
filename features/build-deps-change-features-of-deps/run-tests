@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+function test-demo () {
+    local demo="$1/demo"
+    cd "${demo}"
+    cargo test >/dev/null 2>&1
+    test-return-code "${demo}/std" 0 $?
+    cargo test --no-default-features >/dev/null 2>&1
+    test-return-code "${demo}/no-std" 1 $?
+    cargo clean
+    cd ../..
+}
+
+function test-return-code () {
+    local tag=$1
+    local expected_code=$2
+    local return_code=$3
+    if ([ ${expected_code} -eq 0 ] && [ ${return_code} -eq 0 ]) \
+            || ([ ${expected_code} -ne 0 ] && [ ${return_code} -ne 0 ]); then
+        printf "[SUCCESS]"
+    else
+        printf "[FAILURE]"
+    fi
+    if [ ${expected_code} -eq 0 ]; then
+        printf " The test should be passed,"
+    else
+        printf " The test should be failed,"
+    fi
+    if [ ${return_code} -eq 0 ]; then
+        printf " and it is passed."
+    else
+        printf " and it is failed."
+    fi
+    printf " (${tag})\n"
+}
+
+function main () {
+    test-demo incorrect
+    test-demo correct
+    diff -r --color incorrect correct
+}
+
+main "$@"

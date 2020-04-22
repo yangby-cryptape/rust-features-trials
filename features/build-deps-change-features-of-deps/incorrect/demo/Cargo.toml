@@ -1,0 +1,15 @@
+[package]
+name = "demo"
+version = "0.1.0"
+authors = ["Boyu Yang <yangby@cryptape.com>"]
+edition = "2018"
+
+[dependencies]
+libfoo = { path = "../../libfoo", default-features = false }
+
+[build-dependencies]
+codegen = { package ="codegen", path = "../codegen" }
+
+[features]
+default = ["std"]
+std = ["libfoo/std"]
