@@ -9,7 +9,7 @@ Try out features of Rust.
 ## Contents
 
 - Features
-  - [A crate should be only enable for Linux, and we want to control features of it](features/example-1).
+  - [A crate should be only enable for Linux, and we want to control features of it](features/features-only-for-specific-targets).
 
 ## License
 
